@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace = 绑定一个对应的Mapper接口，即命名空间和接口的全限名一致-->
+<!-- 千万不能写错!!!! -->
+<mapper namespace="com.ywm.mapper.UserMapper">
+    <!-- 查询语句 -->
+    
+    <select id="getUserLike" resultType="com.ywm.pojo.User">
+        select * from mybatis.user where name like #{value}
+    </select>
+    
+    
+    <!-- 里面的id对应上面接口的方法名 -->
+    <select id="getUserList" resultType="com.ywm.pojo.User">
+		select * from user
+	</select>
+
+    <!--根据 id 查询用户，#{} 占位符取id-->
+    <select id="getUserById" parameterType="int" resultType="com.ywm.pojo.User">
+        select * from user where id = #{id}
+    </select>
+
+    <!--insert 一个用户, insert没有返回-->
+    <!--对象中的属性可以直接取出来-->
+    <insert id="addUser" parameterType="com.ywm.pojo.User">
+        insert into mybatis.user (id, name, pwd) values (#{id}, #{name}, #{pwd});
+    </insert>
+
+    <!--修改一个用户-->
+    <update id="updateUser" parameterType="com.ywm.pojo.User">
+        update mybatis.user set name = #{name}, pwd = #{pwd}  where id = #{id};
+    </update>
+
+    <!--删除一个用户-->
+    <delete id="deleteUser" parameterType="int">
+        delete from mybatis.user where id = #{id};
+    </delete>
+
+</mapper>

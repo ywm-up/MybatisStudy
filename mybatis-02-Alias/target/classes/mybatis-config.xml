@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- configuration核心配置文件 -->
+<configuration>
+
+    <!--引入外部配置文件-->
+    <properties resource="db.properties">
+        <property name="username" value="root"/>
+        <property name="password" value="123456"/>
+    </properties>
+
+    <!--可以给实体类起别名-->
+    <typeAliases>
+        <package name="com.ywm.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <!-- transactionManager事务管理，采用 JDBC 事务管理(可选MANAGED) -->
+            <transactionManager type="JDBC"  />
+            <dataSource type="POOLED">
+                <!-- mysql8.0以上的driver要加上cj -->
+                <property name="driver" value="${driver}" />
+                <!-- xml里面的 & 符号要写出 &amp mysql8.0以上还要加上时区 serverTimezone=UTC -->
+                <property name="url" value="${url}" />
+                <property name="username" value="${username}" />
+                <property name="password" value="${password}" />
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--定义映射器-->
+    <!-- 每一个xxxmapper.xml都需要在Mybatis核心配置文件中注册!! -->
+    <!--读取 UserMapper.xml 配置文件，生成映射器-->
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+    </mappers>
+
+</configuration>

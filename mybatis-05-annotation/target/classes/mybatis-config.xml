@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!-- configuration核心配置文件 -->
+<configuration>
+
+    <typeAliases>
+        <package name="com.ywm.pojo"/>
+    </typeAliases>
+
+    <environments default="development">
+        <environment id="development">
+            <!-- transactionManager事务管理，采用 JDBC 事务管理 -->
+            <transactionManager type="JDBC" />
+            <dataSource type="POOLED">
+
+                <!-- mysql8.0以上的driver要加上cj -->
+                <property name="driver" value="com.mysql.cj.jdbc.Driver" />
+                <!-- xml里面的 & 符号要写出 &amp mysql8.0以上还要加上时区 serverTimezone=UTC -->
+                <property name="url"
+                          value="jdbc:mysql://127.0.0.1:3306/mybatis?useUnicode=true&amp;characterEncoding=UTF-8&amp;useSSL=true&amp;serverTimezone=UTC" />
+                <property name="username" value="root" />
+                <property name="password" value="123456" />
+
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!--绑定接口-->
+    <mappers>
+        <mapper class="com.ywm.mapper.UserMapper"/>
+    </mappers>
+</configuration>

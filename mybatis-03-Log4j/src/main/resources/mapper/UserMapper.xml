@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace = 绑定一个对应的Mapper接口，即命名空间和接口的全限名一致-->
+<!-- 千万不能写错!!!! -->
+<mapper namespace="com.ywm.mapper.UserMapper">
+
+    <!--结果集映射-->
+    <resultMap id="UserMap" type="user">
+        <!--column 是数据库中的字段，property实体类中的属性-->
+        <result column="id" property="id"></result>
+        <result column="name" property="name"></result>
+        <result column="pwd" property="password"></result>
+    </resultMap>
+
+
+    <!--根据 id 查询用户，#{} 占位符取id-->
+    <select id="getUserById" parameterType="int" resultMap="UserMap">
+        select id, name, pwd from user where id = #{id}
+    </select>
+
+</mapper>
